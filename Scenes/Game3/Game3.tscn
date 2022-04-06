@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Game3/Player3/Player3.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Fonts/Poppins-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/Game3/Game3.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 23
+font_data = ExtResource( 2 )
+
+[node name="Game3" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Player3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 81.3438, 43.7561 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="TimerRespawn" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="LabelGameOver" type="Label" parent="."]
+visible = false
+margin_left = 71.0575
+margin_top = 287.789
+margin_right = 255.057
+margin_bottom = 333.789
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( -0.59462, -166.451, -1.18922, 790.366 )
+width = 5.0
+default_color = Color( 0, 0, 0, 1 )
+
+[node name="LabelInstructions" type="Label" parent="."]
+margin_left = 52.9706
+margin_top = 146.485
+margin_right = 281.971
+margin_bottom = 286.485
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Use Space key to JUMP"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="showGameOver" from="." to="." method="_on_Game3_showGameOver"]
+[connection signal="timeout" from="TimerRespawn" to="." method="_on_TimerRespawn_timeout"]

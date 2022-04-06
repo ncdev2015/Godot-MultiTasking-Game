@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Game1/Player1/Player1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Game1/Game1.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Fonts/Poppins-Bold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 39
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 23
+font_data = ExtResource( 3 )
+
+[node name="Game1" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 67.8056, 313.601 )
+
+[node name="TimeRespawn" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="LabelGameOver" type="Label" parent="."]
+visible = false
+margin_left = 72.4235
+margin_top = 289.178
+margin_right = 307.423
+margin_bottom = 366.178
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelInstructions" type="Label" parent="."]
+margin_left = 72.0
+margin_top = 63.0
+margin_right = 282.0
+margin_bottom = 194.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Use Up and Down arrows"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="showGameOverLabel" from="." to="." method="_on_Game1_showGameOverLabel"]
+[connection signal="timeout" from="TimeRespawn" to="." method="_on_TimeRespawn_timeout"]
